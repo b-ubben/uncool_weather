@@ -96,6 +96,7 @@ if (count($_POST)) {
 			}
 			
 			footer {
+				animation: appear 1150ms linear;
 				background: rgba(0, 0, 0, 0.4);
 			}
 			
@@ -314,6 +315,8 @@ if (count($_POST)) {
 		<footer class="p-4 small text-center text-white">
 			<p>
 				Built using Bootstrap, Dark Sky API, Font Awesome, PHP and Vue
+				<br>
+				Check out the <a href="https://github.com/b-ubben/uncool_weather" target="_blank" rel="nofollow noreferrer" class="text-warning">GitHub repo</a> for this project
 				<br>
 				Brandon Ubben &copy; 2018
 				<br>

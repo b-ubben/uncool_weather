@@ -225,7 +225,7 @@ if (count($_POST)) {
 											</li>
 											<li class="list-group-item px-0 pt-4">
 												<a href="/">
-													<button class="btn btn-warning container-fluid">
+													<button class="btn btn-warning container-fluid" v-on:click="loading = true" v-on:touch="loading = true">
 														Search Again
 													</button>
 												</a>

@@ -154,7 +154,7 @@ if (count($_POST)) {
 			#app {
 				animation: appear 1150ms linear;
 				background: rgba(0, 0, 0, 0.4);
-				min-height: 80%;
+				min-height: 100%;
 				width: 100%;
 				z-index: 0;
 			}

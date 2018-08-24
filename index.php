@@ -225,7 +225,7 @@ if (count($_POST)) {
 											</li>
 											<li class="list-group-item px-0 pt-4">
 												<a href="/">
-													<button class="btn btn-warning container-fluid" v-on:click="loading = true" v-on:touch="loading = true">
+													<button class="btn btn-warning container-fluid" v-on:click="loading = true">
 														Search Again
 													</button>
 												</a>
@@ -299,12 +299,12 @@ if (count($_POST)) {
 						<h1 class="display-3">Is it cool outside?</h1>
 						<p>Please enter your zip code or city (e.g. Los Angeles, CA) to find out!</p>
 					</div>
-					<form name="search" method="post">
+					<form name="search" method="post" v-on:submit="submitted = true">
 						<div class="form-group bg-transparent">
 							<input type="text" class="form-control shadow" name="location" v-model="location" style="background: rgba(255, 255, 255, 0.9); min-width: 300px;">
 						</div>
 						
-						<button type="submit" class="btn btn-warning shadow w-100" v-bind:disabled="location === ''" v-on:click="submitted = true" v-on:touch="submitted = true"> 
+						<button type="submit" class="btn btn-warning shadow w-100" v-bind:disabled="location === ''"> 
 							<i class="fas fa-search"></i>
 							Search
 						</button>

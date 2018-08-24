@@ -1,6 +1,6 @@
 <?php
 // unCool Weather App 
-// Built in HTML/CSS/PHP and Javascript - BootStrap, DarkSky API, Zippopotam.us API
+// Built in HTML/CSS/PHP and Javascript - BootStrap, Dark Sky API, Font Awesome, Vue.js
 // Brandon Ubben 2018
 //
 require('keys.php');

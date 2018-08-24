@@ -81,6 +81,7 @@ if (count($_POST)) {
 		<title>unCool Weather | Is it cool outside?</title>
 		
 		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<link rel="icon" type="image/x-icon" href="https://images.ubben.co/ubben_favicon.png">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 		<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
@@ -96,7 +97,7 @@ if (count($_POST)) {
 			}
 			
 			footer {
-				animation: appear 1150ms linear;
+				animation: appear 100ms linear;
 				background: rgba(0, 0, 0, 0.4);
 			}
 			
@@ -153,7 +154,7 @@ if (count($_POST)) {
 			#app {
 				animation: appear 1150ms linear;
 				background: rgba(0, 0, 0, 0.4);
-				min-height: 100%;
+				min-width: 80%;
 				width: 100%;
 				z-index: 0;
 			}
@@ -303,7 +304,7 @@ if (count($_POST)) {
 							<input type="text" class="form-control shadow" name="location" v-model="location" style="background: rgba(255, 255, 255, 0.9); min-width: 300px;">
 						</div>
 						
-						<button type="submit" class="btn btn-warning shadow w-100" v-bind:disabled="location === ''" v-on:click="submitted = true"> 
+						<button type="submit" class="btn btn-warning shadow w-100" v-bind:disabled="location === ''" v-on:click="submitted = true" v-on:touch="submitted = true"> 
 							<i class="fas fa-search"></i>
 							Search
 						</button>
@@ -312,7 +313,7 @@ if (count($_POST)) {
 			</template>
 		</div>
 		
-		<footer class="p-4 small text-center text-white">
+		<footer class="p-4 pt-5 small text-center text-white">
 			<p>
 				Built using Bootstrap, Dark Sky API, Font Awesome, PHP and Vue
 				<br>

@@ -18,16 +18,27 @@ function get_forecast($string, $key) {
 	else return $forecast = json_decode(file_get_contents("https://api.darksky.net/forecast/$key/$lat,$lng?exclude=minutely,hourly,alerts,flags"));
 }
 
+function get_location_name($string, $key) {
+	$location = preg_replace('/[^a-zA-Z0-9_ -]/s','', $string);
+	$location = str_replace(' ', '+', $string);
+	
+	$location_info = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=$location"));
+	
+	if ($location_info) return $location_info->results[0]->formatted_address;
+	else return false;
+}
+
 $loading = 'true';
 $submitted = 'false';
 $error = 'false';
-$current_icon = $cool = $daily_forecast_icon_1 = $daily_forecast_icon_2 = $daily_forecast_icon_3 = $daily_forecast_icon_4 = "''";
+$current_icon = $cool = $location_name = "''";
 $current_temp = 0;
 
 if (count($_POST)) {
 	$submitted = 'true';
 	$location = $_POST["location"];
 	$forecast = get_forecast($location, $keys["dark_sky"]);
+	$location_name = str_replace(', USA', '', get_location_name($location, $keys["dark_sky"]));
 	$current_forecast = $daily_forecast = $daily_forecast_icons = [];
 	$first = true;
 	
@@ -204,6 +215,11 @@ if (count($_POST)) {
 								<section class="card shadow text-center">
 									<div class="card-body">
 										<ul class="list-group list-group-flush">
+											<?php if ($location_name !== '') { ?>
+											<li class="list-group-item h5">
+												<?php echo $location_name; ?>
+											</li>
+											<?php }?>
 											<li class="list-group-item">
 												<i v-if="currentIcon === 'clear-day' || currentIcon === 'partly-cloudy-day'" class="fas fa-sun fa-7x">
 												</i>

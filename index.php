@@ -97,7 +97,7 @@ if (count($_POST)) {
 			}
 			
 			footer {
-				animation: appear 100ms linear;
+				animation: appear 1s ease-in;
 				background: rgba(0, 0, 0, 0.4);
 			}
 			
@@ -192,6 +192,9 @@ if (count($_POST)) {
 					<template v-if="error">
 						<main class="align-items-center d-flex flex-column justify-content-center" style="min-height: 90%;">
 							<h2 class="p-2 text-center">There was an error processing your request! Please try again later</h2>
+							<a href="/" v-on:click="loading = true">
+								<button class="btn btn-warning">Go Back</button>
+							</a>
 						</main>
 					</template>
 					

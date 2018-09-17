@@ -33,13 +33,14 @@ $submitted = 'false';
 $error = 'false';
 $current_icon = $cool = $location_name = "''";
 $current_temp = 0;
+$daily_forecast = [];
 
 if (count($_POST)) {
 	$submitted = 'true';
 	$location = $_POST["location"];
 	$forecast = get_forecast($location, $keys["dark_sky"]);
 	$location_name = str_replace(', USA', '', get_location_name($location, $keys["dark_sky"]));
-	$current_forecast = $daily_forecast = $daily_forecast_icons = [];
+	$current_forecast = $daily_forecast_icons = [];
 	$first = true;
 	
 	if ($forecast === false) $error = 'true';

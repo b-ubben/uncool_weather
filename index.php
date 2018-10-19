@@ -6,26 +6,27 @@
 require('keys.php');
 
 function get_forecast($string, $key) {
-	$location = preg_replace('/[^a-zA-Z0-9_ -]/s','', $string);
-	$location = str_replace(' ', '+', $string);
-	
-	$location_info = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=$location"));
-	
-	$lat = $location_info->results[0]->geometry->location->lat;
-	$lng = $location_info->results[0]->geometry->location->lng;
-	
-	if ($lat == '' || $lng == '') return false;
-	else return $forecast = json_decode(file_get_contents("https://api.darksky.net/forecast/$key/$lat,$lng?exclude=minutely,hourly,alerts,flags"));
+	$string = str_replace(' ', '', $string);
+	$string = trim($string);
+	if (is_numeric($string) === false) return false;
+	else {
+		$location_info = json_decode(file_get_contents("http://api.zippopotam.us/us/$string"));
+		$lat = $location_info->places[0]->latitude;
+		$lng = $location_info->places[0]->longitude;
+		if ($lat == '' || $lng == '') return false;
+		else return $forecast = json_decode(file_get_contents("https://api.darksky.net/forecast/$key/$lat,$lng?exclude=minutely,hourly,alerts,flags"));
+	}
 }
 
-function get_location_name($string, $key) {
-	$location = preg_replace('/[^a-zA-Z0-9_ -]/s','', $string);
-	$location = str_replace(' ', '+', $string);
-	
-	$location_info = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=$location"));
-	
-	if ($location_info) return $location_info->results[0]->formatted_address;
-	else return false;
+function get_location_name ($string) {
+	$string = str_replace(' ', '', $string);
+        $string = trim($string);
+	if (is_numeric($string) === false) return false;
+	else {
+		$location_info = json_decode(file_get_contents("http://api.zippopotam.us/us/$string"));
+		if ($location_info) return $location_info->places[0]->{'place name'};
+		else return false;
+	}
 }
 
 $loading = 'true';
@@ -39,7 +40,7 @@ if (count($_POST)) {
 	$submitted = 'true';
 	$location = $_POST["location"];
 	$forecast = get_forecast($location, $keys["dark_sky"]);
-	$location_name = str_replace(', USA', '', get_location_name($location, $keys["dark_sky"]));
+	$location_name = get_location_name($location);
 	$current_forecast = $daily_forecast_icons = [];
 	$first = true;
 	
@@ -317,7 +318,7 @@ if (count($_POST)) {
 				<main class="align-items-center d-flex flex-column justify-content-center" style="min-height: 90%;">
 					<div class="p-2 text-center">
 						<h1 class="display-3">Is it cool outside?</h1>
-						<p>Please enter your zip code or city (e.g. Los Angeles, CA) to find out!</p>
+						<p>Please enter your (US only) zip code to find out!</p>
 					</div>
 					<form name="search" method="post" v-on:submit="submitted = true">
 						<div class="form-group bg-transparent">
